@@ -7,8 +7,7 @@ from components.graphs import plot_portfolio_performance, plot_individual_stock_
 
 
 st.set_page_config(
-    page_title="Portfolio Analyzer"
-    )
+    page_title="Portfolio Analyzer",    )
 
 
 # Title for the app

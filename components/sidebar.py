@@ -36,7 +36,7 @@ def display_sidebar():
     )
 
     # Add a submit button to trigger the portfolio analysis
-    submit_button = st.sidebar.button("Submit Portfolio", type="primary")
+    submit_button = st.sidebar.button("Submit Portfolio")
 
     # Validate input when the submit button is pressed
     if submit_button:
