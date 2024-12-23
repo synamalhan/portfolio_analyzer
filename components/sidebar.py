@@ -7,10 +7,8 @@ def display_sidebar():
     # Sidebar header
     st.sidebar.header("Portfolio Editor")
 
-    # Create an empty DataFrame with columns for tickers and shares
     portfolio = pd.DataFrame(columns=["Ticker", "Shares"])
 
-    # Use the data editor to allow users to input stock tickers and number of shares
     portfolio = st.sidebar.data_editor(
         portfolio, 
         use_container_width=True,
