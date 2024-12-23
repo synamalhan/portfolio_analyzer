@@ -1,13 +1,14 @@
 import streamlit as st
 import pandas as pd
+import yfinance as yf
 
+# Function to display the sidebar and handle portfolio input
 def display_sidebar():
     # Sidebar header
     st.sidebar.header("Portfolio Editor")
 
-    # Initialize the portfolio DataFrame with one empty row (with placeholder values) using pd.concat
-    empty_row = pd.DataFrame({"Ticker": [""], "Shares": [0]})
-    portfolio = pd.concat([empty_row], ignore_index=True)
+    # Create an empty DataFrame with columns for tickers and shares
+    portfolio = pd.DataFrame(columns=["Ticker", "Shares"])
 
     # Use the data editor to allow users to input stock tickers and number of shares
     portfolio = st.sidebar.data_editor(
@@ -15,14 +16,47 @@ def display_sidebar():
         use_container_width=True,
         column_order=["Ticker", "Shares"], 
         column_config={
-            "Ticker": st.column_config.Text("Stock Ticker"),
-            "Shares": st.column_config.Number("Number of Shares", min_value=1),
+            "Ticker": st.column_config.TextColumn("Stock Ticker"),
+            "Shares": st.column_config.NumberColumn("Number of Shares", min_value=1),
         },
-        num_rows="fixed",  # Fixed number of rows, but editable
+        num_rows="dynamic",  # Fixed number of rows, but editable
         key="portfolio_data_editor"
     )
 
     # Add a submit button to trigger the portfolio analysis
     submit_button = st.sidebar.button("Submit Portfolio")
 
+    # Validate input when the submit button is pressed
+    if submit_button:
+        invalid_rows = []
+
+        for idx, row in portfolio.iterrows():
+            ticker = row['Ticker']
+            shares = row['Shares']
+
+            # Check if the ticker is empty
+            if not ticker.strip():
+                invalid_rows.append(f"Row {idx+1}: Ticker is empty. Please enter a valid ticker.")
+
+            # Check if the number of shares is valid
+            if shares <= 0:
+                invalid_rows.append(f"Row {idx+1}: Invalid Shares - {shares}. Shares must be greater than 0.")
+
+            # Check if the ticker exists by trying to fetch data using yfinance
+            if ticker.strip():
+                try:
+                    stock_data = yf.Ticker(ticker).history(period="1d")
+                    if stock_data.empty:
+                        invalid_rows.append(f"Row {idx+1}: No data found for ticker '{ticker}'. Please enter a valid ticker.")
+                except Exception as e:
+                    invalid_rows.append(f"Row {idx+1}: Error fetching data for ticker '{ticker}': {e}")
+
+        # Display error messages if any validation fails
+        if invalid_rows:
+            for error in invalid_rows:
+                st.sidebar.error(error)
+        else:
+            st.sidebar.success("Portfolio is valid! Ready for analysis.")
+
     return portfolio, submit_button
+

@@ -5,6 +5,12 @@ from components.sidebar import display_sidebar  # Importing sidebar functionalit
 from components.calculations import calculate_total_return, calculate_volatility, calculate_sharpe_ratio  # Importing calculation functions
 from components.graphs import plot_portfolio_performance, plot_individual_stock_contributions  # Importing graph functions
 
+
+st.set_page_config(
+    page_title="Portfolio Analyzer"
+    )
+
+
 # Title for the app
 st.title("Portfolio Performance Analyzer")
 
@@ -50,12 +56,12 @@ if submit_button:
             # Plot portfolio performance over time using the graph function
             st.subheader("Portfolio Performance Over Time")
             fig = plot_portfolio_performance(portfolio_df)
-            st.pyplot(fig)
+            st.plotly_chart(fig)
 
             # Plot individual stock contributions using the graph function
             st.subheader("Individual Stock Contributions")
             fig = plot_individual_stock_contributions(portfolio_df)
-            st.pyplot(fig)
+            st.plotly_chart(fig)
         else:
             st.write("No valid stocks in portfolio.")
     else:
