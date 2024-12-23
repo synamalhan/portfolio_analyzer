@@ -17,6 +17,12 @@ st.title("Portfolio Performance Analyzer")
 # Display the sidebar and get portfolio data
 portfolio, submit_button = display_sidebar()
 
+calc = st.container(border=True)
+
+port = st.expander("Portfolio Data")
+
+graphs = st.container(border=True)
+
 # Process and display results after the submit button is clicked
 if submit_button:
     if not portfolio.empty and not portfolio["Ticker"].isnull().all():
@@ -38,30 +44,27 @@ if submit_button:
             portfolio_df['Total Portfolio Value'] = portfolio_df.sum(axis=1)
 
             # Display portfolio data
-            st.subheader("Portfolio Data")
-            st.write(portfolio_df)
+            port.write(portfolio_df)
 
             # Calculate performance metrics using functions from calculations.py
             total_return = calculate_total_return(portfolio_df)
-            st.write(f"**Total Return**: {total_return * 100:.2f}%")
+            calc.write(f"**Total Return**: {total_return * 100:.2f}%")
 
             # Calculate volatility (annualized)
             volatility = calculate_volatility(portfolio_df)
-            st.write(f"**Volatility (Risk)**: {volatility * 100:.2f}%")
+            calc.write(f"**Volatility (Risk)**: {volatility * 100:.2f}%")
 
             # Calculate Sharpe ratio (assuming a 0% risk-free rate)
             sharpe_ratio = calculate_sharpe_ratio(portfolio_df)
-            st.write(f"**Sharpe Ratio**: {sharpe_ratio:.2f}")
+            calc.write(f"**Sharpe Ratio**: {sharpe_ratio:.2f}")
 
             # Plot portfolio performance over time using the graph function
-            st.subheader("Portfolio Performance Over Time")
             fig = plot_portfolio_performance(portfolio_df)
-            st.plotly_chart(fig)
+            graphs.plotly_chart(fig)
 
             # Plot individual stock contributions using the graph function
-            st.subheader("Individual Stock Contributions")
             fig = plot_individual_stock_contributions(portfolio_df)
-            st.plotly_chart(fig)
+            graphs.plotly_chart(fig)
         else:
             st.write("No valid stocks in portfolio.")
     else:

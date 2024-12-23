@@ -5,7 +5,21 @@ import yfinance as yf
 # Function to display the sidebar and handle portfolio input
 def display_sidebar():
     # Sidebar header
-    st.sidebar.header("Portfolio Editor")
+    st.sidebar.title("Portfolio Editor")
+
+    with st.sidebar.popover("How This Tool Works"):
+        st.write("""
+            This tool allows you to input stock tickers and the number of shares 
+            you hold for each stock in your portfolio. It will validate the entered 
+            tickers and shares, ensuring:
+            
+            1. Ticker symbols are valid and exist on Yahoo Finance.
+            2. The number of shares is greater than 0.
+            
+            If any issues are detected, an appropriate error message will be displayed.
+            Once your portfolio is valid, you can proceed to analysis.
+        """)
+
 
     portfolio = pd.DataFrame(columns=["Ticker", "Shares"])
 
@@ -22,7 +36,7 @@ def display_sidebar():
     )
 
     # Add a submit button to trigger the portfolio analysis
-    submit_button = st.sidebar.button("Submit Portfolio")
+    submit_button = st.sidebar.button("Submit Portfolio", type="primary")
 
     # Validate input when the submit button is pressed
     if submit_button:
