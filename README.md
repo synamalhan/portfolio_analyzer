@@ -1,4 +1,4 @@
-# Portfolio Performance Analyzer
+# 💼 Portfolio Performance Analyzer 💼
 
 ## Project Overview  
 The Portfolio Performance Analyzer is a Streamlit-based application that allows users to analyze their stock portfolios. Users can input stock tickers and the number of shares they hold, and the tool validates the input, fetches data from Yahoo Finance, and provides insights into the portfolio's performance and composition.
@@ -14,6 +14,8 @@ The Portfolio Performance Analyzer is a Streamlit-based application that allows 
 - **Analysis**:  
   - Calculates portfolio performance metrics such as total value, individual stock contributions, and returns.  
   - Visualizes portfolio composition and performance using interactive graphs powered by Plotly.  
+  - Displays **Risk vs. Return Scatter Plot** to understand portfolio risk-reward trade-offs.  
+  - Performs **Sector Allocation Analysis** to display portfolio diversification by industry sectors.
 
 ## How to Use  
 1. **Input Portfolio**:  
@@ -28,31 +30,35 @@ The Portfolio Performance Analyzer is a Streamlit-based application that allows 
 ## Installation  
 
 ### Prerequisites  
-- Python 3.11
+- Python 3.11  
 - Pip for package management  
 
 ### Steps  
 1. Clone the repository:  
    ```
    git clone https://github.com/yourusername/portfolio-performance-analyzer.git
-    ```
+   ```  
 2. Install dependencies:  
    ```
-   pip install -r requirements.txt```  
+   pip install -r requirements.txt
+   ```  
 3. Run the application:  
    ```
-   streamlit run portfolio_analyse.py```
+   streamlit run portfolio_analyse.py
+   ```  
 
 ## Project Structure  
 ```
-portfolio-performance-analyzer/
+portfolio-analyzer/ 
+|--.streamlit/
+| |--config.toml
 |-- components/
-| |-- sidebar.py # Handles the sidebar input and validation logic
-| |-- calculations.py # Contains all portfolio calculation methods
-| |-- graphs.py # Handles the creation of visualizations
-|-- portfolio_analyse.py # Main application file
-|-- README.md # Project documentation
-|-- requirements.txt # List of required dependencies
+| |-- sidebar.py 
+| |-- calculations.py 
+| |-- graphs.py 
+|-- portfolio_analyse.py 
+|-- README.md 
+|-- requirements.txt 
 ```
 
 
@@ -66,11 +72,11 @@ portfolio-performance-analyzer/
 1. Open the application.  
 2. Enter stock tickers (e.g., AAPL, GOOGL) and the corresponding number of shares in the sidebar.  
 3. Submit the portfolio.  
-4. View validation results and detailed analysis.  
+4. View validation results and detailed analysis, including risk-return scatter plot and sector allocation breakdown.  
 
 ## Future Enhancements  
 - Add support for historical performance comparison.  
-- Include advanced metrics like Sharpe ratio and beta.  
+- Include advanced metrics like beta and portfolio diversification metrics.  
 - Enable export of portfolio analysis to PDF/Excel.  
 - Integrate additional data sources for broader stock market coverage.  
 
@@ -81,4 +87,4 @@ Contributions are welcome! To contribute:
 3. Submit a pull request with a detailed description of your changes.  
 
 ## License  
-This project is licensed under the MIT License. See the LICENSE file for more details.  
+This project is licensed under the MIT License. See the LICENSE file for more details.
