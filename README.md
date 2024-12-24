@@ -3,6 +3,9 @@
 ## Project Overview  
 The Portfolio Performance Analyzer is a Streamlit-based application that allows users to analyze their stock portfolios. Users can input stock tickers and the number of shares they hold, and the tool validates the input, fetches data from Yahoo Finance, and provides insights into the portfolio's performance and composition.
 
+[![Watch the video](./image.png)](https://youtu.be/a8Nxz7PEKwE)
+
+
 ## Features  
 - **Dynamic Portfolio Input**: Users can add stock tickers and the number of shares interactively using a data editor in the sidebar.  
 - **Validation**:  
